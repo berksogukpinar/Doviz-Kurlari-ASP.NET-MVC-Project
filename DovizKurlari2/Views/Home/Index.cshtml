@@ -1,0 +1,1186 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+<style>
+    /* CSS */
+    .button-55 {
+        align-self: center;
+        background-color: #fff;
+        background-image: none;
+        background-position: 0 90%;
+        background-repeat: repeat no-repeat;
+        background-size: 4px 3px;
+        border-radius: 15px 225px 255px 15px 15px 255px 225px 15px;
+        border-style: solid;
+        border-width: 2px;
+        box-shadow: rgba(0, 0, 0, .2) 15px 28px 25px -18px;
+        box-sizing: border-box;
+        color: #41403e;
+        cursor: pointer;
+        display: inline-block;
+        font-family: Neucha, sans-serif;
+        font-size: 1rem;
+        line-height: 23px;
+        outline: none;
+        padding: .75rem;
+        text-decoration: none;
+        transition: all 235ms ease-in-out;
+        border-bottom-left-radius: 15px 255px;
+        border-bottom-right-radius: 225px 15px;
+        border-top-left-radius: 255px 15px;
+        border-top-right-radius: 15px 225px;
+        user-select: none;
+        -webkit-user-select: none;
+        touch-action: manipulation;
+    }
+        .button-55:hover {
+            box-shadow: rgba(0, 0, 0, .3) 2px 8px 8px -5px;
+            transform: translate3d(0, 2px, 0);
+        }
+        .button-55:focus {
+            box-shadow: rgba(0, 0, 0, .3) 2px 8px 4px -6px;
+        }
+</style>
+<div class="container">
+    <h1 style="text-align:center; font-family:'Adient Sans'">TCMB Döviz Kurları ve Grafikleri</h1>
+</div>
+
+<div class="container">
+    <div class="col-md-4">
+        <h1><i class="glyphicon glyphicon-usd" style="color:green"> </i></h1>
+        <a href="#demo"><h3 id="demo"></h3></a>
+    </div>
+    <div class="col-md-4">
+        <h1><i class="glyphicon glyphicon-euro" style="color:blue"></i></h1>
+        <a href="#euroButton1"> <h3 id="demo1"></h3> </a>
+    </div>
+    <div class="col-md-4">
+        <h1><i class="glyphicon glyphicon-gbp" style="color:red"></i></h1>
+        <a href="#myChart3"> <h3 id="demo2"></h3> </a>
+    </div>
+</div>
+<br />
+<br />
+
+<button class="button-55" id="dolarButon1" onclick="eurUsdHaftalikGuncelle()">7 Günlük</button>
+<button class="button-55" id="dolarButon1" onclick="eurUsdOnBesGuncelle()">15 Günlük</button>
+<button class="button-55" onclick="eurUsdAylikGuncelle()">1 Aylık</button>
+<button class="button-55" onclick="eurUsdUcAylikGuncelle()">3 Aylık</button>
+<button class="button-55" onclick="eurUsdAltiAylikGuncelle()">6 Aylık</button>
+<p id="eurUsdOrtalama" style="float:right;font-size:20px;"></p>
+<canvas id="myChart5" style=" margin-bottom: 50px;"></canvas>
+<br />
+<br />
+
+<button class="button-55" id="dolarButon1" onclick="haftalikTumunuGuncelle()">7 Günlük</button>
+<button class="button-55" id="dolarButon1" onclick="onBesTumunuGuncelle()">15 Günlük</button>
+<button class="button-55" onclick="aylikTumunuGuncelle()">1 Aylık</button>
+<button class="button-55" onclick="ucAylikTumunuGuncelle()">3 Aylık</button>
+<button class="button-55" onclick="altiAylikTumunuGuncelle()">6 Aylık</button>
+<p id="allOrtalama" style="float:right;font-size:20px;"></p>
+<canvas id="myChart4" style=" margin-bottom: 50px;"></canvas>
+
+<br />
+<br />
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-4">
+            <button class="button-55" id="dolarButon1" onclick="dolarHaftalikGuncelle()">7 Günlük</button>
+            <button class="button-55" id="dolarButon1" onclick="dolarOnBesGuncelle()">15 Günlük</button>
+            <button class="button-55" onclick="dolarAylikGuncelle()">1 Aylık</button>
+            <button class="button-55" onclick="dolarUcAylikGuncelle()">3 Aylık</button>
+            <button class="button-55" onclick="dolarAltiAylikGuncelle()">6 Aylık</button>
+            <p id="dolarOrtalama" style="float:right;font-size:20px;"></p>
+            <canvas id="myChart" style=" margin-bottom: 50px;"></canvas>
+        </div>
+        <div class="col-md-4">
+            <button id="euroButton1" class="button-55" onclick="euroHaftalikGuncelle()">7 Günlük</button>
+            <button id="euroButton1" class="button-55" onclick="euroOnBesGuncelle()">15 Günlük</button>
+            <button class="button-55" onclick="euroAylikGuncelle()">1 Aylık</button>
+            <button class="button-55" onclick="euroUcAylikGuncelle()">3 Aylık</button>
+            <button class="button-55" onclick="euroAltiAylikGuncelle()">6 Aylık</button>
+            <p id="euroOrtalama" style="float:right;font-size:20px;"></p>
+            <canvas id="myChart2" style=" margin-bottom: 100px;"></canvas>
+        </div>
+        <div class="col-md-4">
+            <button class="button-55" onclick="sterlinHaftalikGuncelle()">7 Günlük</button>
+            <button class="button-55" onclick="sterlinOnBesGuncelle()">15 Günlük</button>
+            <button class="button-55" onclick="sterlinAylikGuncelle()">1 Aylık</button>
+            <button class="button-55" onclick="sterlinUcAylikGuncelle()">3 Aylık</button>
+            <button class="button-55" onclick="sterlinAltiAylikGuncelle()">6 Aylık</button>
+            <p id="sterlinOrtalama" style="float:right;font-size:20px;"></p>
+            <canvas id="myChart3" style=" margin-bottom: 100px;"></canvas>
+        </div>
+    </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    window.onload = function () {
+        verileriGetir();
+    };
+    function verileriGetir() {
+        fetch('https://localhost:44310/Home/GetData')
+            .then((res) => res.json())
+            .then((result) => {
+                var r0 = result[0];
+                var r1 = result[3];
+                var r2 = result[4];
+                document.getElementById("demo").innerHTML = "<h1>" + r0.Kod + " </h1> Alış: " + r0.AlisKur + " </br> </br> Satış: " + r0.SatisKur;
+                document.getElementById("demo1").innerHTML = "<h1>" + r1.Kod + " </h1> Alış: " + r1.AlisKur + " </br> </br> Satış: " + r1.SatisKur;
+                document.getElementById("demo2").innerHTML = "<h1>" + r2.Kod + " </h1> Alış:" + r2.AlisKur + "</br> </br> Satış: " + r2.SatisKur;
+                HaftalikKarisikData();
+                HaftalikEurUsdData();
+                HaftalikDolarData();
+                HaftalikEuroData();
+                HaftalikSterlinData();
+            }).catch(function () {
+                console.log("failed");
+            });
+    }
+    // Grafiği ilk çizdirmek için fonksiyonlar
+    function HaftalikDolarData() {
+        fetch('https://localhost:44310/Home/WeeklyData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                var haftalikData = [];
+                var haftalikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    haftalikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    haftalikDate.push(result[i].Tarih);
+                }
+
+                for (var i = 0; i < haftalikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / haftalikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("dolarOrtalama").innerHTML = "Haftalık Ortalama :" + Ortalama;
+                dolarGrafigi(haftalikData, haftalikDate);
+            }).catch((err) => console.log(err));
+    };
+    function HaftalikEurUsdData() {
+        fetch('https://localhost:44310/Home/WeeklyEurUsdData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                var haftalikDolarData = [];
+                var haftalikDate = [];
+                var haftalikEuroData = [];
+                var eurUsdBolumu = [];
+                var dolar = result.filter(x => x.Kod === "USD");
+                var euro = result.filter(x => x.Kod === "EUR");
+                for (var i = 0; i < dolar.length; i++) {
+                    haftalikDolarData.push(dolar[i].SatisKur);
+                }
+                for (var i = 0; i < dolar.length; i++) {
+                    haftalikDate.push(dolar[i].Tarih);
+                }
+                for (var i = 0; i < euro.length; i++) {
+                    haftalikEuroData.push(euro[i].SatisKur);
+                }
+                for (var i = 0; i < haftalikDate.length; i++) {
+                    var tmp = haftalikEuroData[i] / haftalikDolarData[i];
+                    eurUsdBolumu.push(tmp);
+                }
+                for (var i = 0; i < haftalikDate.length; i++) {
+                    Ortalama = Ortalama + parseFloat(eurUsdBolumu[i]) / haftalikDate.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("eurUsdOrtalama").innerHTML = "Haftalık Ortalama :" + Ortalama;
+                eurUsdGrafigi(eurUsdBolumu, haftalikDate);
+            }).catch((err) => console.log(err));
+    };
+    function HaftalikKarisikData() {
+        fetch('https://localhost:44310/Home/WeeklyAllData')
+            .then((res) => res.json())
+            .then((result) => {
+                var haftalikDataDolar = [];
+                var haftalikDataEuro = [];
+                var haftalikDataSterlin = [];
+                var haftalikDateDolar = [];
+                var dolar = result.filter(x => x.Kod === "USD");
+                var euro = result.filter(x => x.Kod === "EUR");
+                var sterlin = result.filter(x => x.Kod === "GBP");
+                //dolar verileri için döngüler
+                for (var i = 0; i < dolar.length; i++) {
+                    haftalikDataDolar.push(dolar[i].SatisKur);
+                }
+                for (var i = 0; i < dolar.length; i++) {
+                    haftalikDateDolar.push(dolar[i].Tarih);
+                }
+                //euro verileri için push
+                for (var i = 0; i < euro.length; i++) {
+                    haftalikDataEuro.push(euro[i].SatisKur);
+                }
+                //sterlin verileri için push
+                for (var i = 0; i < sterlin.length; i++) {
+                    haftalikDataSterlin.push(sterlin[i].SatisKur);
+                }
+                karisikGrafik(haftalikDataDolar, haftalikDateDolar, haftalikDataEuro, haftalikDataSterlin);
+            }).catch((err) => console.log(err));
+    };
+    function HaftalikEuroData() {
+        fetch('https://localhost:44310/Home/WeeklyEuroData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                var haftalikData = [];
+                var haftalikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    haftalikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    haftalikDate.push(result[i].Tarih);
+                }
+
+                for (var i = 0; i < haftalikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / haftalikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("euroOrtalama").innerHTML = "Haftalık Ortalama :" + Ortalama;
+                euroGrafigi(haftalikData, haftalikDate);
+
+            }).catch((err) => console.log(err));
+    };
+    function HaftalikSterlinData() {
+        fetch('https://localhost:44310/Home/WeeklySterlinData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                var haftalikData = [];
+                var haftalikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    haftalikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    haftalikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < haftalikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / haftalikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("sterlinOrtalama").innerHTML = "Haftalık Ortalama :" + Ortalama;
+                sterlinGrafigi(haftalikData, haftalikDate);
+
+            }).catch((err) => console.log(err));
+    };
+
+    //Grafiği güncellemek için fonksiyonlar ---------------------
+
+    // Euro Güncelleme Fonksyionları
+    function euroHaftalikGuncelle() {        
+        fetch('https://localhost:44310/Home/WeeklyEuroData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("euroOrtalama").innerHTML = "Haftalık Ortalama :" + Ortalama;
+                EuroChart.data.datasets[0].data = aylikData;
+                EuroChart.data.labels = aylikDate;
+                EuroChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function euroOnBesGuncelle() {
+        fetch('https://localhost:44310/Home/FifteenEuroData')
+            .then((res) => res.json())
+            .then((result) => {
+                console.log(result)
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("euroOrtalama").innerHTML = "15 Günlük Ortalama :" + Ortalama;
+                EuroChart.data.datasets[0].data = aylikData;
+                EuroChart.data.labels = aylikDate;
+                EuroChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function euroAylikGuncelle() {
+        fetch('https://localhost:44310/Home/MonthlyEuroData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("euroOrtalama").innerHTML = "Aylık Ortalama :" + Ortalama;
+                EuroChart.data.datasets[0].data = aylikData;
+                EuroChart.data.labels = aylikDate;
+                EuroChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function euroUcAylikGuncelle() {
+        fetch('https://localhost:44310/Home/ThreeMonthEuroData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("euroOrtalama").innerHTML = "3 Aylık Ortalama :" + Ortalama;
+                EuroChart.data.datasets[0].data = aylikData;
+                EuroChart.data.labels = aylikDate;
+                EuroChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function euroAltiAylikGuncelle() {
+        fetch('https://localhost:44310/Home/SixMonthEuroData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("euroOrtalama").innerHTML = "6 Aylık Ortalama :" + Ortalama;
+                EuroChart.data.datasets[0].data = aylikData;
+                EuroChart.data.labels = aylikDate;
+                EuroChart.update();
+            }).catch((err) => console.log(err));
+    };
+    // EUR/USD Güncelleme Fonksiyonları
+    function eurUsdHaftalikGuncelle() {
+        fetch('https://localhost:44310/Home/WeeklyEurUsdData')
+            .then((res) => res.json())
+            .then((result) => {
+                result.reverse();
+                var Ortalama = 0;
+                var haftalikDolarData = [];
+                var haftalikEurUsdDate = [];
+                var haftalikEuroData = [];
+                var eurUsdBolumu = [];
+                var dolar = result.filter(x => x.Kod === "USD");
+                var euro = result.filter(x => x.Kod === "EUR");
+                for (var i = 0; i < dolar.length; i++) {
+                    haftalikDolarData.push(dolar[i].SatisKur);
+                }
+                for (var i = 0; i < dolar.length; i++) {
+                    haftalikEurUsdDate.push(dolar[i].Tarih);
+                }
+                for (var i = 0; i < euro.length; i++) {
+                    haftalikEuroData.push(euro[i].SatisKur);
+                }
+                for (var i = 0; i < haftalikEurUsdDate.length; i++) {
+                    var tmp = haftalikEuroData[i] / haftalikDolarData[i];
+                    eurUsdBolumu.push(tmp);
+                }
+                for (var i = 0; i < haftalikEurUsdDate.length; i++) {
+                    Ortalama = Ortalama + parseFloat(eurUsdBolumu[i]) / haftalikEurUsdDate.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("eurUsdOrtalama").innerHTML = "Aylık Ortalama :" + Ortalama;
+                EurUsdChart.data.datasets[0].data = eurUsdBolumu;
+                EurUsdChart.data.labels = haftalikEurUsdDate;
+                EurUsdChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function eurUsdOnBesGuncelle() {
+        fetch('https://localhost:44310/Home/FifteenEurUsdData')
+            .then((res) => res.json())
+            .then((result) => {
+                result.reverse();
+                var Ortalama = 0;
+                var haftalikDolarData = [];
+                var haftalikEurUsdDate = [];
+                var haftalikEuroData = [];
+                var eurUsdBolumu = [];
+                var dolar = result.filter(x => x.Kod === "USD");
+                var euro = result.filter(x => x.Kod === "EUR");
+                for (var i = 0; i < dolar.length; i++) {
+                    haftalikDolarData.push(dolar[i].SatisKur);
+                }
+                for (var i = 0; i < dolar.length; i++) {
+                    haftalikEurUsdDate.push(dolar[i].Tarih);
+                }
+                for (var i = 0; i < euro.length; i++) {
+                    haftalikEuroData.push(euro[i].SatisKur);
+                }
+                for (var i = 0; i < haftalikEurUsdDate.length; i++) {
+                    var tmp = haftalikEuroData[i] / haftalikDolarData[i];
+                    eurUsdBolumu.push(tmp);
+                }
+                for (var i = 0; i < haftalikEurUsdDate.length; i++) {
+                    Ortalama = Ortalama + parseFloat(eurUsdBolumu[i]) / haftalikEurUsdDate.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("eurUsdOrtalama").innerHTML = "Aylık Ortalama :" + Ortalama;
+                EurUsdChart.data.datasets[0].data = eurUsdBolumu;
+                EurUsdChart.data.labels = haftalikEurUsdDate;
+                EurUsdChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function eurUsdAylikGuncelle() {
+        fetch('https://localhost:44310/Home/MonthlyEurUsdData')
+            .then((res) => res.json())
+            .then((result) => {
+                result.reverse();
+                var Ortalama = 0;
+                var aylikDolarData = [];
+                var aylikEurUsdDate = [];
+                var aylikEurodData = [];
+                var eurUsdBolumu = [];
+                var dolar = result.filter(x => x.Kod === "USD");
+                var euro = result.filter(x => x.Kod === "EUR");
+                for (var i = 0; i < dolar.length; i++) {
+                    aylikDolarData.push(dolar[i].SatisKur);
+                }
+                for (var i = 0; i < dolar.length; i++) {
+                    aylikEurUsdDate.push(dolar[i].Tarih);
+                }
+                for (var i = 0; i < euro.length; i++) {
+                    aylikEurodData.push(euro[i].SatisKur);
+                }
+                for (var i = 0; i < aylikEurUsdDate.length; i++) {
+                    var tmp = aylikEurodData[i] / aylikDolarData[i];
+                    eurUsdBolumu.push(tmp);
+                }
+                for (var i = 0; i < aylikEurUsdDate.length; i++) {
+                    Ortalama = Ortalama + parseFloat(eurUsdBolumu[i]) / aylikEurUsdDate.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("eurUsdOrtalama").innerHTML = "Aylık Ortalama :" + Ortalama;
+                EurUsdChart.data.datasets[0].data = eurUsdBolumu;
+                EurUsdChart.data.labels = aylikEurUsdDate;
+                EurUsdChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function eurUsdUcAylikGuncelle() {
+        fetch('https://localhost:44310/Home/ThreeMonthlyEurUsdData')
+            .then((res) => res.json())
+            .then((result) => {
+                result.reverse();
+                var Ortalama = 0;
+                var ucAylikDolarData = [];
+                var ucAylikEurUsdDate = [];
+                var ucAylikEuroData = [];
+                var eurUsdBolumu = [];
+                var dolar = result.filter(x => x.Kod === "USD");
+                var euro = result.filter(x => x.Kod === "EUR");
+                for (var i = 0; i < dolar.length; i++) {
+                    ucAylikDolarData.push(dolar[i].SatisKur);
+                }
+                for (var i = 0; i < dolar.length; i++) {
+                    ucAylikEurUsdDate.push(dolar[i].Tarih);
+                }
+                for (var i = 0; i < euro.length; i++) {
+                    ucAylikEuroData.push(euro[i].SatisKur);
+                }
+                for (var i = 0; i < ucAylikEurUsdDate.length; i++) {
+                    var tmp = ucAylikEuroData[i] / ucAylikDolarData[i];
+                    eurUsdBolumu.push(tmp);
+                }
+                for (var i = 0; i < ucAylikEurUsdDate.length; i++) {
+                    Ortalama = Ortalama + parseFloat(eurUsdBolumu[i]) / ucAylikEurUsdDate.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("eurUsdOrtalama").innerHTML = "Aylık Ortalama :" + Ortalama;
+                EurUsdChart.data.datasets[0].data = eurUsdBolumu;
+                EurUsdChart.data.labels = ucAylikEurUsdDate;
+                EurUsdChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function eurUsdAltiAylikGuncelle() {
+        fetch('https://localhost:44310/Home/SixMonthlyEurUsdData')
+            .then((res) => res.json())
+            .then((result) => {
+                result.reverse();
+                var Ortalama = 0;
+                var altiAylikDolarData = [];
+                var altiAylikEurUsdDate = [];
+                var altiAylikEuroData = [];
+                var eurUsdBolumu = [];
+                var dolar = result.filter(x => x.Kod === "USD");
+                var euro = result.filter(x => x.Kod === "EUR");
+                for (var i = 0; i < dolar.length; i++) {
+                    altiAylikDolarData.push(dolar[i].SatisKur);
+                }
+                for (var i = 0; i < dolar.length; i++) {
+                    altiAylikEurUsdDate.push(dolar[i].Tarih);
+                }
+                for (var i = 0; i < euro.length; i++) {
+                    altiAylikEuroData.push(euro[i].SatisKur);
+                }
+                for (var i = 0; i < altiAylikEurUsdDate.length; i++) {
+                    var tmp = altiAylikEuroData[i] / altiAylikDolarData[i];
+                    eurUsdBolumu.push(tmp);
+                }
+                for (var i = 0; i < altiAylikEurUsdDate.length; i++) {
+                    Ortalama = Ortalama + parseFloat(eurUsdBolumu[i]) / altiAylikEurUsdDate.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("eurUsdOrtalama").innerHTML = "Aylık Ortalama :" + Ortalama;
+                EurUsdChart.data.datasets[0].data = eurUsdBolumu;
+                EurUsdChart.data.labels = altiAylikEurUsdDate;
+                EurUsdChart.update();
+            }).catch((err) => console.log(err));
+    };
+    // 3'lü grafik Güncelleme fonksiyonları
+    function haftalikTumunuGuncelle() {
+        fetch('https://localhost:44310/Home/WeeklyAllData')
+            .then((res) => res.json())
+            .then((result) => {
+                result.reverse();
+                var haftalikDataDolar = [];
+                var haftalikDataEuro = [];
+                var haftalikDataSterlin = [];
+                var haftalikDateDolar = [];
+                var dolar = result.filter(x => x.Kod === "USD");
+                var euro = result.filter(x => x.Kod === "EUR");
+                var sterlin = result.filter(x => x.Kod === "GBP");
+                //dolar verileri için döngüler
+                for (var i = 0; i < dolar.length; i++) {
+                    haftalikDataDolar.push(dolar[i].SatisKur);
+                }
+                for (var i = 0; i < dolar.length; i++) {
+                    haftalikDateDolar.push(dolar[i].Tarih);
+                }
+                //euro verileri için push
+                for (var i = 0; i < euro.length; i++) {
+                    haftalikDataEuro.push(euro[i].SatisKur);
+                }
+                //sterlin verileri için push
+                for (var i = 0; i < sterlin.length; i++) {
+                    haftalikDataSterlin.push(sterlin[i].SatisKur);
+                }
+                TumVerilerChart.data.datasets[0].data = haftalikDataDolar;
+                TumVerilerChart.data.datasets[1].data = haftalikDataEuro;
+                TumVerilerChart.data.datasets[2].data = haftalikDataSterlin;
+                TumVerilerChart.data.labels = haftalikDateDolar;
+                TumVerilerChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function onBesTumunuGuncelle() {
+        fetch('https://localhost:44310/Home/FifteenAllData')
+            .then((res) => res.json())
+            .then((result) => {
+                console.log(result);
+                result.reverse();
+                var haftalikDataDolar = [];
+                var haftalikDataEuro = [];
+                var haftalikDataSterlin = [];
+                var haftalikDateDolar = [];
+                var dolar = result.filter(x => x.Kod === "USD");
+                var euro = result.filter(x => x.Kod === "EUR");
+                var sterlin = result.filter(x => x.Kod === "GBP");
+                //dolar verileri için döngüler
+                for (var i = 0; i < dolar.length; i++) {
+                    haftalikDataDolar.push(dolar[i].SatisKur);
+                }
+                for (var i = 0; i < dolar.length; i++) {
+                    haftalikDateDolar.push(dolar[i].Tarih);
+                }
+                //euro verileri için push
+                for (var i = 0; i < euro.length; i++) {
+                    haftalikDataEuro.push(euro[i].SatisKur);
+                }
+                //sterlin verileri için push
+                for (var i = 0; i < sterlin.length; i++) {
+                    haftalikDataSterlin.push(sterlin[i].SatisKur);
+                }
+                TumVerilerChart.data.datasets[0].data = haftalikDataDolar;
+                TumVerilerChart.data.datasets[1].data = haftalikDataEuro;
+                TumVerilerChart.data.datasets[2].data = haftalikDataSterlin;
+                TumVerilerChart.data.labels = haftalikDateDolar;
+                TumVerilerChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function aylikTumunuGuncelle() {
+        fetch('https://localhost:44310/Home/MonthlyAllData')
+            .then((res) => res.json())
+            .then((result) => {
+                result.reverse();
+                var aylikDataDolar = [];
+                var aylikDataEuro = [];
+                var aylikDataSterlin = [];
+                var aylikDateDolar = [];
+                var dolar = result.filter(x => x.Kod === "USD");
+                var euro = result.filter(x => x.Kod === "EUR");
+                var sterlin = result.filter(x => x.Kod === "GBP");
+                //dolar verileri için döngüler
+                for (var i = 0; i < dolar.length; i++) {
+                    aylikDataDolar.push(dolar[i].SatisKur);
+                }
+                for (var i = 0; i < dolar.length; i++) {
+                    aylikDateDolar.push(dolar[i].Tarih);
+                }
+                //euro verileri için push
+                for (var i = 0; i < euro.length; i++) {
+                    aylikDataEuro.push(euro[i].SatisKur);
+                }
+                //sterlin verileri için push
+                for (var i = 0; i < sterlin.length; i++) {
+                    aylikDataSterlin.push(sterlin[i].SatisKur);
+                }
+                TumVerilerChart.data.datasets[0].data = aylikDataDolar;
+                TumVerilerChart.data.datasets[1].data = aylikDataEuro;
+                TumVerilerChart.data.datasets[2].data = aylikDataSterlin;
+                TumVerilerChart.data.labels = aylikDateDolar;
+                TumVerilerChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function ucAylikTumunuGuncelle() {
+        fetch('https://localhost:44310/Home/ThreeMonthlyAllData')
+            .then((res) => res.json())
+            .then((result) => {
+                result.reverse();
+                var ucAylikDataDolar = [];
+                var ucAylikDataEuro = [];
+                var ucAylikDataSterlin = [];
+                var ucAylikDateDolar = [];
+                var dolar = result.filter(x => x.Kod === "USD");
+                var euro = result.filter(x => x.Kod === "EUR");
+                var sterlin = result.filter(x => x.Kod === "GBP");
+                //dolar verileri için döngüler
+                for (var i = 0; i < dolar.length; i++) {
+                    ucAylikDataDolar.push(dolar[i].SatisKur);
+                }
+                for (var i = 0; i < dolar.length; i++) {
+                    ucAylikDateDolar.push(dolar[i].Tarih);
+                }
+                //euro verileri için push
+                for (var i = 0; i < euro.length; i++) {
+                    ucAylikDataEuro.push(euro[i].SatisKur);
+                }
+                //sterlin verileri için push
+                for (var i = 0; i < sterlin.length; i++) {
+                    ucAylikDataSterlin.push(sterlin[i].SatisKur);
+                }
+                TumVerilerChart.data.datasets[0].data = ucAylikDataDolar;
+                TumVerilerChart.data.datasets[1].data = ucAylikDataEuro;
+                TumVerilerChart.data.datasets[2].data = ucAylikDataSterlin;
+                TumVerilerChart.data.labels = ucAylikDateDolar;
+                TumVerilerChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function altiAylikTumunuGuncelle() {
+        fetch('https://localhost:44310/Home/SixMonthlyAllData')
+            .then((res) => res.json())
+            .then((result) => {
+                result.reverse();
+                var altiAylikDataDolar = [];
+                var altiAylikDataEuro = [];
+                var altiAylikDataSterlin = [];
+                var altiAylikDateDolar = [];
+                var dolar = result.filter(x => x.Kod === "USD");
+                var euro = result.filter(x => x.Kod === "EUR");
+                var sterlin = result.filter(x => x.Kod === "GBP");
+                //dolar verileri için döngüler
+                for (var i = 0; i < dolar.length; i++) {
+                    altiAylikDataDolar.push(dolar[i].SatisKur);
+                }
+                for (var i = 0; i < dolar.length; i++) {
+                    altiAylikDateDolar.push(dolar[i].Tarih);
+                }
+                //euro verileri için push
+                for (var i = 0; i < euro.length; i++) {
+                    altiAylikDataEuro.push(euro[i].SatisKur);
+                }
+                //sterlin verileri için push
+                for (var i = 0; i < sterlin.length; i++) {
+                    altiAylikDataSterlin.push(sterlin[i].SatisKur);
+                }
+                TumVerilerChart.data.datasets[0].data = altiAylikDataDolar;
+                TumVerilerChart.data.datasets[1].data = altiAylikDataEuro;
+                TumVerilerChart.data.datasets[2].data = altiAylikDataSterlin;
+                TumVerilerChart.data.labels = altiAylikDateDolar;
+                TumVerilerChart.update();
+            }).catch((err) => console.log(err));
+    };
+    // Dolar güncelleme fonksiyonları
+    function dolarHaftalikGuncelle() {
+        fetch('https://localhost:44310/Home/WeeklyData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("dolarOrtalama").innerHTML = "Haftalık Ortalama :" + Ortalama;
+                DolarChart.data.datasets[0].data = aylikData;
+                DolarChart.data.labels = aylikDate;
+                DolarChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function dolarOnBesGuncelle() {
+        fetch('https://localhost:44310/Home/FifteenDolarData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("dolarOrtalama").innerHTML = "Aylık Ortalama :" + Ortalama;
+                DolarChart.data.datasets[0].data = aylikData;
+                DolarChart.data.labels = aylikDate;
+                DolarChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function dolarAylikGuncelle() {
+        fetch('https://localhost:44310/Home/MonthlyData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("dolarOrtalama").innerHTML = "Aylık Ortalama :" + Ortalama;
+                DolarChart.data.datasets[0].data = aylikData;
+                DolarChart.data.labels = aylikDate;
+                DolarChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function dolarUcAylikGuncelle() {
+        fetch('https://localhost:44310/Home/ThreeMonthData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("dolarOrtalama").innerHTML = "3 Aylık Ortalama :" + Ortalama;
+                DolarChart.data.datasets[0].data = aylikData;
+                DolarChart.data.labels = aylikDate;
+                DolarChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function dolarAltiAylikGuncelle() {
+        fetch('https://localhost:44310/Home/SixMonthData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("dolarOrtalama").innerHTML = "6 Aylık Ortalama :" + Ortalama;
+                DolarChart.data.datasets[0].data = aylikData;
+                DolarChart.data.labels = aylikDate;
+                DolarChart.update();
+            }).catch((err) => console.log(err));
+    };
+    //Sterlin Güncelleme Fonksiyonları
+    function sterlinHaftalikGuncelle() {
+        fetch('https://localhost:44310/Home/WeeklySterlinData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("sterlinOrtalama").innerHTML = "Haftalık Ortalama :" + Ortalama;
+                SterlinChart.data.datasets[0].data = aylikData;
+                SterlinChart.data.labels = aylikDate;
+                SterlinChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function sterlinOnBesGuncelle() {
+        fetch('https://localhost:44310/Home/FifteenSterlinData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("sterlinOrtalama").innerHTML = "15 Günlük Ortalama :" + Ortalama;
+                SterlinChart.data.datasets[0].data = aylikData;
+                SterlinChart.data.labels = aylikDate;
+                SterlinChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function sterlinAylikGuncelle() {
+        fetch('https://localhost:44310/Home/MonthlySterlinData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("sterlinOrtalama").innerHTML = "Aylık Ortalama :" + Ortalama;
+                SterlinChart.data.datasets[0].data = aylikData;
+                SterlinChart.data.labels = aylikDate;
+                SterlinChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function sterlinUcAylikGuncelle() {
+        fetch('https://localhost:44310/Home/ThreeMonthSterlinData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("sterlinOrtalama").innerHTML = "3 Aylık Ortalama :" + Ortalama;
+                SterlinChart.data.datasets[0].data = aylikData;
+                SterlinChart.data.labels = aylikDate;
+                SterlinChart.update();
+            }).catch((err) => console.log(err));
+    };
+    function sterlinAltiAylikGuncelle() {
+        fetch('https://localhost:44310/Home/SixMonthSterlinData')
+            .then((res) => res.json())
+            .then((result) => {
+                var Ortalama = 0;
+                result.reverse();
+                var aylikData = [];
+                var aylikDate = [];
+                for (var i = 0; i < result.length; i++) {
+                    aylikData.push(result[i].SatisKur);
+                }
+                for (var i = 0; i < result.length; i++) {
+                    aylikDate.push(result[i].Tarih);
+                }
+                for (var i = 0; i < aylikData.length; i++) {
+                    Ortalama = Ortalama + parseFloat(result[i].SatisKur) / aylikData.length
+                }
+                Ortalama = Ortalama.toFixed(3)
+                document.getElementById("sterlinOrtalama").innerHTML = "6 Aylık Ortalama :" + Ortalama;
+                SterlinChart.data.datasets[0].data = aylikData;
+                SterlinChart.data.labels = aylikDate;
+                SterlinChart.update();
+            }).catch((err) => console.log(err));
+    };
+    //Chart için variable tanımlamaları
+    var DolarChart;
+    var label;
+    var EuroChart;
+    var label2;
+    var SterlinChart;
+    var label3;
+    var TumVerilerChart;
+    var label4;
+    var EurUsdChart;
+    var label5;
+    //Grafik çizdirme fonksiyonları
+    function dolarGrafigi(data, date) {
+        var myChart = document.getElementById('myChart').getContext('2d');
+        data.reverse();
+        date.reverse();
+        label = "TCMB Dolar Grafiği";
+        DolarChart = new Chart(myChart, {
+            type: 'line',
+            data: {
+                labels: date,
+                datasets: [{
+                    label: label,
+                    data: data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ], borderColor: [
+                        'rgba(60, 179, 113,1)',
+                    ], hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                    hoverBorderColor: "orange",
+                }]
+            },
+            options: {
+                legend: {
+                    labels: {
+                        fontColor: "blue",
+                        fontSize: 18
+                    }
+                },
+            }
+        });
+    }
+    function karisikGrafik(dataDolar, dateDolar, haftalikDataEuro, haftalikDataSterlin) {
+        var myChart = document.getElementById('myChart4').getContext('2d');
+        dataDolar.reverse();
+        dateDolar.reverse();
+        haftalikDataEuro.reverse();
+        haftalikDataSterlin.reverse();
+        label = "TCMB Dolar";
+        label2 = "TCMB Euro";
+        label3 = "TCMB Sterlin";
+        TumVerilerChart = new Chart(myChart, {
+            type: 'line',
+            data: {
+                labels: dateDolar,
+                datasets: [{
+                    label: label,
+                    data: dataDolar,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ], borderColor: [
+                        'rgba(60, 179, 113,1)',
+                    ], hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                    hoverBorderColor: "orange",
+                }, {
+                    label: label2,
+                    data: haftalikDataEuro,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ], borderColor: [
+                        'rgba(0,0,255,1)',
+                    ], hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                    hoverBorderColor: "orange",
+                }, {
+                    label: label3,
+                    data: haftalikDataSterlin,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ], borderColor: [
+                        'rgba(255,0,0,1)',
+                    ], hoverBackgroundColor: "rgba(232,105,90,0.8)",
+                    hoverBorderColor: "orange",
+                }]
+            },
+            options: {
+                legend: {
+                    labels: {
+                        fontColor: "blue",
+                        fontSize: 18
+                    }
+                },
+            }
+        });
+    }
+    function euroGrafigi(data, date) {
+        var myChart = document.getElementById('myChart2').getContext('2d');
+        data.reverse();
+        date.reverse();
+        label2 = 'TCMB Euro Grafiği';
+        EuroChart = new Chart(myChart, {
+            type: 'line',
+            data: {
+                labels: date,
+                datasets: [{
+                    label: label2,
+                    data: data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ], borderColor: [
+                        'rgba(0, 0, 255, 1)',
+                    ],
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Euro Grafigi'
+                }
+            }
+        });
+    }
+    function sterlinGrafigi(data, date) {
+        var myChart = document.getElementById('myChart3').getContext('2d');
+        data.reverse();
+        date.reverse();
+        label3 = "TCMB Sterlin Grafiği";
+        SterlinChart = new Chart(myChart, {
+            type: 'line',
+            data: {
+                labels: date,
+                datasets: [{
+                    label: label3,
+                    data: data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ], borderColor: [
+                        'rgba(255, 0, 0,1)',
+                    ],
+                }]
+            },
+            options: {}
+        });
+    }
+    function eurUsdGrafigi(data, date) {
+        var myChart = document.getElementById('myChart5').getContext('2d');
+        data.reverse();
+        date.reverse();
+        label3 = "TCMB EUR/USD Grafiği";
+        EurUsdChart = new Chart(myChart, {
+            type: 'line',
+            data: {
+                labels: date,
+                datasets: [{
+                    label: label3,
+                    data: data,
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ], borderColor: [
+                        'rgba(126,126,126,1)',
+                    ],
+                }]
+            },
+            options: {}
+        });
+    }
+</script>
