@@ -51,5 +51,7 @@ Project is created with:
 * ![3AylıkKarışıkData](https://user-images.githubusercontent.com/43846785/140275286-295998e9-50fa-41f0-ad5d-3037a6568a97.png)
 * ![eurUSDGrafik](https://user-images.githubusercontent.com/43846785/140275318-c23aefc3-2053-4a6e-9c40-12be9ac50307.png)
 * ![UygulamaGörüntüleri-2](https://user-images.githubusercontent.com/43846785/140275946-0b2b9b9f-7659-41a7-8047-b1d773049f5f.png)
+* ![3 ayrı veri](https://user-images.githubusercontent.com/43846785/140279348-c0e55c25-8695-4c3d-8a44-7d02a74c8d39.png)
+
 
 
