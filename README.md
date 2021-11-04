@@ -5,14 +5,14 @@
 
 Currency Rates app created with JavaScript,C# and MSSQL Server.
 ## Table of contents
-* [General info](#general-info)
+* [General Info](#general-info)
 * [Technologies](#technologies)
 * [Database Connection](#database-connection)
 * [Code Examples](#code-examples)
 * [Setup]($setup)
 * [ScreenShots](#screenshots)
 
-## General info
+## General Info
 * This project provides the display of Currency Rates with the help of graphics.
 * It saves Dollar, Euro and Sterling data in the database by dynamically pulling from https://www.tcmb.gov.tr/kurlar/today.xml link.
 * When the application is not entered for a certain day, the data is retrieved and saved in the database by going backwards from the day the user entered the application. 
