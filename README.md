@@ -9,7 +9,7 @@ Currency Rates app created with JavaScript,C# and MSSQL Server.
 * [Technologies](#technologies)
 * [Database Connection](#database-connection)
 * [Code Examples](#code-examples)
-* [Setup]($setup)
+* [Setup](#setup)
 * [ScreenShots](#screenshots)
 
 ## General Info
